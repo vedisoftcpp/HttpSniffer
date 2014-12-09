@@ -30,6 +30,7 @@ HEADERS += \
     connected_client_data_t.h \
     threadbase.hpp \
     win32/thread.hpp \
-    utils.h
+    utils.h \
+    HttpStataEntry.h
 
 

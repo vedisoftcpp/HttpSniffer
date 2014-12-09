@@ -26,6 +26,7 @@ class RemoveThreadFunc;
 class HttpStatistics;
 
 struct connected_client_data_t;
+struct HttpStataEntry;
 
 }
 

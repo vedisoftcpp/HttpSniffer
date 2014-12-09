@@ -3,6 +3,8 @@
 
 #include "headers.h"
 #include <sstream>
+#include <map>
+#include "HttpStataEntry.h"
 
 #include <iostream>
 
@@ -15,6 +17,7 @@ public:
     HttpStatistics();
     ~HttpStatistics();
     void get(std::stringstream& stream);
+    void update(const HttpStataEntry& entry);
 
     template <typename T>
     HttpStatistics& operator<<(const T & data)
@@ -33,6 +36,7 @@ public:
 private:
     Mutex _mutex;
     std::stringstream _stata_stream;
+    std::map<std::string, HttpStataEntry> _statistics;
 
     HttpStatistics(const HttpStatistics&);
 };
