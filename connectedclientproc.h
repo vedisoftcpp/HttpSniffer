@@ -21,6 +21,7 @@ private:
     int _id;
     RemoveThreadFunc* _remove_thread_func;
     HttpStatistics* _http_statistics;
+    Socket _client_socket;
 };
 
 }

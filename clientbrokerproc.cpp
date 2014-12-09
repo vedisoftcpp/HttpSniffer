@@ -28,10 +28,10 @@ void ClientBrokerProc::operator()()
     {
         std::cout << "create client thread: " << client_id << std::endl;
 
-        server_socket.accept();
+        connected_client_data.client_socket = server_socket.accept();
+        connected_client_data.client_id = client_id;
 
         _client_threads_mutex.acquire();
-        connected_client_data.client_id = client_id;
         _client_threads[client_id] = new Thread<ConnectedClientProc>((void*)&connected_client_data);
         _client_threads[client_id]->start();
         _client_threads_mutex.release();

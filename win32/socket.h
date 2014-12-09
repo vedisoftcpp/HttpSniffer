@@ -4,6 +4,8 @@
 #include "../ISocket.h"
 #include "../headers.h"
 
+#include <string>
+
 class Socket : public ISocket
 {
 public:
@@ -14,14 +16,14 @@ public:
     void bind(int port);
     void listen();
     Socket accept();
-
-public:
-    static void initialize();
-    static void clean_up();
+    void send(const std::string& msg);
 
 private:
     SOCKET _socket;
 
+public:
+    static void initialize();
+    static void clean_up();
 };
 
 #endif // SOCKET_H

@@ -9,6 +9,7 @@ namespace HttpSniffer
 struct connected_client_data_t
 {
     int client_id;
+    Socket client_socket;
     HttpStatistics* http_statistics;
     RemoveThreadFunc* remove_thread_func;
 };

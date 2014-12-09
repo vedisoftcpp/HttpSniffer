@@ -79,6 +79,16 @@ Socket Socket::accept()
     return Socket(client_socket);
 }
 
+void Socket::send(const std::string& msg)
+{
+    int iSendResult = ::send( _socket, msg.c_str(), msg.length(), 0 );
+    if (iSendResult == SOCKET_ERROR)
+    {
+        std::cout << "send failed with error\n";
+        WSACleanup();
+    }
+}
+
 void Socket::initialize()
 {
     WSADATA wsaData;
