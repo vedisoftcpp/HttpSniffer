@@ -2,6 +2,7 @@
 #define MUTEX_H
 
 #include "../IMutex.h"
+#include "../headers.h"
 
 class Mutex : public IMutex
 {
@@ -10,6 +11,11 @@ public:
 
     void acquire();
     void release();
+    void create();
+    void close();
+
+private:
+    HANDLE _mutex;
 };
 
 #endif // MUTEX_H

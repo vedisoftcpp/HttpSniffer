@@ -67,6 +67,16 @@ void Socket::listen()
     }
 }
 
+bool Socket::is_closed()
+{
+    int nSendBytes = ::send(_socket, "0", 1, 0);
+    if (nSendBytes == SOCKET_ERROR)
+    {
+         return true;
+    }
+    return false;
+}
+
 Socket Socket::accept()
 {
     SOCKET client_socket = ::accept(_socket, NULL, NULL);
@@ -87,6 +97,19 @@ void Socket::send(const std::string& msg)
         std::cout << "send failed with error\n";
         WSACleanup();
     }
+}
+
+std::string Socket::recv()
+{
+    char recvbuf[512];
+    int recvbuflen = 512;
+    int iResult = ::recv(_socket, recvbuf, recvbuflen, 0);
+    if (iResult > 0)
+    {
+        std::cout << "Bytes received\n";
+        return std::string(recvbuf);
+    }
+    return std::string("");
 }
 
 void Socket::initialize()

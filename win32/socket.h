@@ -15,8 +15,11 @@ public:
 
     void bind(int port);
     void listen();
+    bool is_closed();
+
     Socket accept();
     void send(const std::string& msg);
+    std::string recv();
 
 private:
     SOCKET _socket;

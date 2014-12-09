@@ -21,6 +21,9 @@ protected:
 
 private:
     static DWORD WINAPI winapi_thread_toutine(LPVOID param);
+
+private:
+    Thread(const Thread<T>&);
 };
 
 //---------------------------------------------

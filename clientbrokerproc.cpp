@@ -11,6 +11,12 @@ namespace HttpSniffer
 ClientBrokerProc::ClientBrokerProc(void* data) :
     _http_statistics((HttpStatistics*)data)
 {
+    _client_threads_mutex.create();
+}
+
+ClientBrokerProc::~ClientBrokerProc()
+{
+    _client_threads_mutex.close();
 }
 
 void ClientBrokerProc::operator()()
@@ -31,12 +37,13 @@ void ClientBrokerProc::operator()()
         connected_client_data.client_socket = server_socket.accept();
         connected_client_data.client_id = client_id;
 
+        std::cout << "accept client!!! " << std::endl;
+
         _client_threads_mutex.acquire();
         _client_threads[client_id] = new Thread<ConnectedClientProc>((void*)&connected_client_data);
         _client_threads[client_id]->start();
         _client_threads_mutex.release();
         client_id++;
-
 
         std::cout << "ololo: " << client_id << std::endl;
 

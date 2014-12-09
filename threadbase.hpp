@@ -20,6 +20,9 @@ protected:
 
 protected:
     static int _thread_wrap_proc(void *data);
+
+private:
+    ThreadBase(const ThreadBase<T>&);
 };
 
 //---------------------------------------------

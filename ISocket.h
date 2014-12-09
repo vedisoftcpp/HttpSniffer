@@ -7,6 +7,7 @@ public:
     virtual void bind(int port) = 0;
     virtual void listen() = 0;
     //virtual void accept() = 0;
+    virtual bool is_closed() = 0;
 };
 
 #endif // ISOCKET_H

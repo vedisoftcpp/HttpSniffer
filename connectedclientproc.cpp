@@ -1,8 +1,10 @@
 #include "connectedclientproc.h"
 #include "removethreadfunc.h"
 #include "connected_client_data_t.h"
+#include "httpstatistics.h"
 
 #include <iostream>
+#include <sstream>
 
 namespace HttpSniffer
 {
@@ -24,8 +26,25 @@ ConnectedClientProc::~ConnectedClientProc()
 
 void ConnectedClientProc::operator()()
 {
-    std::cout << "thread: " << _id << std::endl;
-    _client_socket.send("hello");
+    while (true)
+    {
+        std::string msg = _client_socket.recv();
+        if (msg == "Get event")
+        {
+            std::cout << "thread: " << _id << std::endl;
+            std::stringstream ss;
+            _http_statistics->get(ss);
+            _client_socket.send(ss.str());
+            //_client_socket.send("hello");
+        }
+        else
+        {
+            std::cout << "incoming: " << msg << "\n";
+        }
+
+        if (_client_socket.is_closed())
+            break;
+    }
 }
 
 }

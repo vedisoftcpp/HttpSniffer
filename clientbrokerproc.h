@@ -12,6 +12,7 @@ class ClientBrokerProc
 {
 public:
     ClientBrokerProc(void* data);
+    ~ClientBrokerProc();
 
     void operator() ();
 

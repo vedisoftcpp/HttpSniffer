@@ -12,6 +12,9 @@ public:
     HttpSnifferProc(void* data);
 
     void operator() ();
+
+private:
+    HttpStatistics* _http_statistics;
 };
 
 }
