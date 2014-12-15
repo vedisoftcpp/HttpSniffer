@@ -34,7 +34,7 @@ void ConnectedClientProc::operator()()
             std::cout << "thread: " << _id << std::endl;
             std::stringstream ss;
             _http_statistics->get(ss);
-            _client_socket.send(ss.str());
+            _client_socket.send(ss.str()+"\r\n");
             //_client_socket.send("hello");
         }
         else

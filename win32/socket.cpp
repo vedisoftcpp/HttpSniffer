@@ -33,14 +33,14 @@ void Socket::bind(int port)
     if ( iResult != 0 )
     {
         std::cout << "getaddrinfo failed with error\n";
-        WSACleanup();
+        //WSACleanup();
     }
 
     _socket = ::socket(result->ai_family, result->ai_socktype, result->ai_protocol);
     if (_socket == INVALID_SOCKET) {
         std::cout << "socket failed with error\n";
         freeaddrinfo(result);
-        WSACleanup();
+        //WSACleanup();
     }
 
     iResult = ::bind( _socket, result->ai_addr, (int)result->ai_addrlen);
@@ -49,7 +49,7 @@ void Socket::bind(int port)
         std::cout << "bind failed with error\n";
         freeaddrinfo(result);
         closesocket(_socket);
-        WSACleanup();
+        //WSACleanup();
     }
 
     freeaddrinfo(result);
@@ -63,13 +63,13 @@ void Socket::listen()
     {
         std::cout << "listen failed with error\n";
         closesocket(_socket);
-        WSACleanup();
+        //WSACleanup();
     }
 }
 
 bool Socket::is_closed()
 {
-    int nSendBytes = ::send(_socket, "0", 1, 0);
+    int nSendBytes = ::send(_socket, "\0", 1, 0);
     if (nSendBytes == SOCKET_ERROR)
     {
          return true;
@@ -84,7 +84,7 @@ Socket Socket::accept()
     {
         std::cout << "accept failed with error\n";
         closesocket(_socket);
-        WSACleanup();
+        //WSACleanup();
     }
     return Socket(client_socket);
 }
@@ -95,7 +95,7 @@ void Socket::send(const std::string& msg)
     if (iSendResult == SOCKET_ERROR)
     {
         std::cout << "send failed with error\n";
-        WSACleanup();
+        //WSACleanup();
     }
 }
 

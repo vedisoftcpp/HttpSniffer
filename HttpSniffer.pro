@@ -1,6 +1,13 @@
 TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
+CONFIG += no_lflags_merge
+
+win32 {
+INCLUDEPATH += $$PWD/../../Local/Include
+LIBS += -L$$PWD/../../Local/Lib/ -lwpcap
+}
+INCLUDEPATH += C:\Users\denism\Local\Include
 
 SOURCES += main.cpp \
     httpsnifferserver.cpp \
@@ -11,7 +18,9 @@ SOURCES += main.cpp \
     connectedclientproc.cpp \
     removethreadfunc.cpp \
     httpstatistics.cpp \
-    utils.cpp
+    utils.cpp \
+    ippackethandler.cpp \
+    ippacket.cpp
 
 HEADERS += \
     IMutex.h \
@@ -31,6 +40,8 @@ HEADERS += \
     threadbase.hpp \
     win32/thread.hpp \
     utils.h \
-    HttpStataEntry.h
+    HttpStataEntry.h \
+    ippackethandler.h \
+    ippacket.h
 
 

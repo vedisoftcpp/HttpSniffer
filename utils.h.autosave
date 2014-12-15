@@ -21,6 +21,8 @@ namespace HttpSniffer
 
 IpPacket create_ip_packet_from_raw(void* ip_packet_ptr);
 
+bool is_ip_packet_fragmented(const IpPacket& ip_packet);
+
 }
 
 #endif // UTILS_H
