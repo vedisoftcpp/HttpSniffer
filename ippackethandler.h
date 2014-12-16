@@ -16,7 +16,7 @@ public:
 
 private:
     typedef u_int16_t ip_packet_id;
-    std::map<id_packet_id, std::vector<IpPacket> > _fragmented_packets;
+    std::map<ip_packet_id, std::vector<IpPacket> > _fragmented_packets;
 };
 
 }

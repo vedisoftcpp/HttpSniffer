@@ -11,6 +11,10 @@ class PcapIpPacketSniffer : public IpPacketSnifferBase
 {
 public:
     PcapIpPacketSniffer();
+
+    void init();
+
+    IpPacket get_ip_packet();
 };
 
 }

@@ -10,6 +10,8 @@ class HttpHeaderParser
 {
 public:
     HttpHeaderParser();
+
+    void parse(std::string& header);
 };
 
 }

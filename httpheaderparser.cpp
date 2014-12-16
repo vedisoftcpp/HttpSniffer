@@ -7,4 +7,9 @@ HttpHeaderParser::HttpHeaderParser()
 {
 }
 
+void HttpHeaderParser::parse(std::string& header)
+{
+
+}
+
 }

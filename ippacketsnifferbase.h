@@ -13,6 +13,7 @@ public:
     IpPacketSnifferBase();
 
     virtual IpPacket get_ip_packet() = 0;
+    virtual void init() = 0;
 };
 
 }

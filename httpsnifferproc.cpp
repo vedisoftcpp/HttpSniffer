@@ -21,6 +21,7 @@ HttpSnifferProc::~HttpSnifferProc()
 
 void HttpSnifferProc::operator()()
 {
+    _ip_packet_sniffer->init();
     while (true)
     {
         IpPacket ip_packet = _ip_packet_sniffer->get_ip_packet();
@@ -32,6 +33,7 @@ void HttpSnifferProc::operator()()
         }
         catch(...)
         {
+            continue;
         }
 
         TcpDatagram tcp_datagram = tcp_datagram_from_ip_packet(ip_packet);

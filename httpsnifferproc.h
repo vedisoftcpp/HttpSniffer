@@ -17,8 +17,6 @@ public:
 
     void operator() ();
 
-    void eject_url(const std::vector<u_char>& data);
-
 private:
     HttpStatistics* _http_statistics;
 
