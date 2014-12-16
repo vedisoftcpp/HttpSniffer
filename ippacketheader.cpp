@@ -1,4 +1,4 @@
-#include "ippacket.h"
+#include "ippacketheader.h"
 
 namespace HttpSniffer
 {

@@ -20,7 +20,15 @@ SOURCES += main.cpp \
     httpstatistics.cpp \
     utils.cpp \
     ippackethandler.cpp \
-    ippacket.cpp
+    ippacket.cpp \
+    tcpdatagram.cpp \
+    ippacketheader.cpp \
+    tcpdatagramheader.cpp \
+    tcpdatagramhandler.cpp \
+    tcpdatagramid.cpp \
+    httpheaderparser.cpp \
+    ippacketsnifferbase.cpp \
+    pcapippacketsniffer.cpp
 
 HEADERS += \
     IMutex.h \
@@ -42,6 +50,14 @@ HEADERS += \
     utils.h \
     HttpStataEntry.h \
     ippackethandler.h \
-    ippacket.h
+    ippacket.h \
+    tcpdatagram.h \
+    ippacketheader.h \
+    tcpdatagramheader.h \
+    tcpdatagramhandler.h \
+    tcpdatagramid.h \
+    httpheaderparser.h \
+    ippacketsnifferbase.h \
+    pcapippacketsniffer.h
 
 

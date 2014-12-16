@@ -38,6 +38,13 @@ class ConnectedClientProc;
 class RemoveThreadFunc;
 class HttpStatistics;
 class IpPacket;
+class IpPacketHeader;
+class IpPacketHandler;
+class TcpDatagram;
+class TcpDatagramHeader;
+class TcpStreamHandler;
+
+class IpPacketSnifferBase;
 
 struct connected_client_data_t;
 struct HttpStataEntry;

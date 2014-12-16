@@ -23,6 +23,11 @@ IpPacket create_ip_packet_from_raw(void* ip_packet_ptr);
 
 bool is_ip_packet_fragmented(const IpPacket& ip_packet);
 
+bool is_tcp_protocol(const IpPacket& ip_packet);
+
+TcpDatagram tcp_datagram_from_ip_packet(const IpPacket& ip_packet);
+
+
 }
 
 #endif // UTILS_H
