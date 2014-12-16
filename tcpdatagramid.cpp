@@ -1,6 +1,5 @@
 #include "tcpdatagramid.h"
 #include "tcpdatagram.h"
-
 #include "ippacket.h"
 
 namespace HttpSniffer
@@ -28,15 +27,23 @@ bool TcpDatagramId::operator<(const TcpDatagramId& tcp_dataram_id) const
 {
     if (_src_addr < tcp_dataram_id._src_addr)
         return true;
+    else if (_src_addr > tcp_dataram_id._src_addr)
+        return false;
 
     if (_dst_addr < tcp_dataram_id._dst_addr)
         return true;
+    else if (_dst_addr > tcp_dataram_id._dst_addr)
+        return false;
 
     if (_src_port < tcp_dataram_id._src_port)
         return true;
+    else if (_src_port > tcp_dataram_id._src_port)
+        return false;
 
     if (_dst_port < tcp_dataram_id._dst_port)
         return true;
+    else if (_dst_port > tcp_dataram_id._dst_port)
+        return false;
 
     return false;
 }

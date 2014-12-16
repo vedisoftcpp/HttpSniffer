@@ -24,6 +24,8 @@ public:
     u_int32_t src_addr;
     u_int32_t dst_addr;
     std::vector<u_int8_t> options;
+
+    u_int size() const { return ihl * 4; }
 };
 
 }

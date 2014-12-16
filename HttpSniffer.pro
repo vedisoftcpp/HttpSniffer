@@ -58,6 +58,7 @@ HEADERS += \
     tcpdatagramid.h \
     httpheaderparser.h \
     ippacketsnifferbase.h \
-    pcapippacketsniffer.h
+    pcapippacketsniffer.h \
+    types.h
 
 

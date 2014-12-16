@@ -27,6 +27,8 @@ public:
     u_int16_t checksum;
     u_int16_t urg_ptr;
     std::vector<u_int8_t> options;
+
+    u_int size() const { return data_offset*4; }
 };
 
 }

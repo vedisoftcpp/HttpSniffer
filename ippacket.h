@@ -12,8 +12,6 @@ class IpPacket
 public:
     IpPacketHeader header;
     std::vector<u_int8_t> data;
-
-    u_int16_t header_size() const { return header.ihl * 4; }
 };
 
 }

@@ -15,6 +15,9 @@ public:
     void init();
 
     IpPacket get_ip_packet();
+
+private:
+    pcap_t* _adhandle;
 };
 
 }

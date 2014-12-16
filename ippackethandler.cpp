@@ -21,7 +21,9 @@ IpPacket IpPacketHandler::defragment_packet(const IpPacket& ip_packet)
         std::vector<IpPacket> fragmented_packets;
         fragmented_packets.push_back(ip_packet);
         _fragmented_packets[ip_packet.header.id] = fragmented_packets;
-        throw IpPacketIsFragmentedException();
+        //throw IpPacketIsFragmentedException();
+        std::cout << "1\n";
+        throw 1;
     }
     else
     {
@@ -40,7 +42,9 @@ IpPacket IpPacketHandler::defragment_packet(const IpPacket& ip_packet)
         if (first_packet.header.fragment_offset)
         {
             // there isn't first packet
-            throw ThereIsNotFirstIpPacketException();
+            //throw ThereIsNotFirstIpPacketException();
+            std::cout << "2\n";
+            throw 1;
         }
 
         bool more_fragments = true;
@@ -53,7 +57,9 @@ IpPacket IpPacketHandler::defragment_packet(const IpPacket& ip_packet)
             if (_ip_packet.header.fragment_offset != data_length/8)
             {
                 // not all packets was recived
-                throw NotAllIpPacketsWasRecivedException;
+                //throw NotAllIpPacketsWasRecivedException;
+                std::cout << "3\n";
+                throw 1;
             }
 
             data_length += _ip_packet.data.size();
@@ -62,13 +68,15 @@ IpPacket IpPacketHandler::defragment_packet(const IpPacket& ip_packet)
         if (more_fragments)
         {
             // there isn't last packet
-            throw ThereIsNotLastIpPacketException;
+            //throw ThereIsNotLastIpPacketException;
+            std::cout << "4\n";
+            throw 1;
         }
 
         // now we can merge fragmented packets
 
         // first packet header length + common data length
-        first_packet.header.total_length = first_packet.header_size() + data_length;
+        first_packet.header.total_length = first_packet.header.size() + data_length;
 
         for (it = fragmented_packets.begin()+1; it != fragmented_packets.end(); ++it)
         {

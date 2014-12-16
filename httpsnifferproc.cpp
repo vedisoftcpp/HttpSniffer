@@ -36,7 +36,7 @@ void HttpSnifferProc::operator()()
             continue;
         }
 
-        TcpDatagram tcp_datagram = tcp_datagram_from_ip_packet(ip_packet);
+        TcpDatagram tcp_datagram(ip_packet);
         if (tcp_datagram.header.dst_port == 80)
         {
             _tcp_datagram_handler.process(tcp_datagram);

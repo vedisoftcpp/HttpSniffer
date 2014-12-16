@@ -49,6 +49,8 @@ class IpPacketSnifferBase;
 struct connected_client_data_t;
 struct HttpStataEntry;
 
+struct ip_header_t;
+
 }
 
 #endif // HEADERS_H
