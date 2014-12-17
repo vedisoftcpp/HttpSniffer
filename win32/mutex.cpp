@@ -5,6 +5,12 @@ Mutex::Mutex()
 {
 }
 
+Mutex::~Mutex()
+{
+    if (_mutex != NULL)
+        close();
+}
+
 void Mutex::acquire()
 {
     WaitForSingleObject(_mutex, INFINITE);

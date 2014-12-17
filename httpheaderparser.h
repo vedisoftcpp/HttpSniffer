@@ -12,6 +12,8 @@ public:
     HttpHeaderParser();
 
     void parse(std::string& header);
+
+    std::vector<std::string> buffer;
 };
 
 }

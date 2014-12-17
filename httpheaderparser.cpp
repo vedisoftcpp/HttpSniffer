@@ -18,7 +18,7 @@ void HttpHeaderParser::parse(std::string& header)
         if (eol == std::string::npos)
             return;
         std::string url(header.begin()+pos+6, header.begin()+eol);
-        std::cout << url << "\n";
+        buffer.push_back(url);
         header.erase(header.begin(), header.begin()+eol);
     }
 }

@@ -25,8 +25,6 @@ bool is_ip_packet_fragmented(const IpPacket& ip_packet);
 
 bool is_tcp_protocol(const IpPacket& ip_packet);
 
-//TcpDatagram tcp_datagram_from_ip_packet(const IpPacket& ip_packet);
-
 struct fragmented_ordering
 {
     bool operator() (const IpPacket& p1, const IpPacket& p2) const

@@ -32,12 +32,12 @@ void ClientBrokerProc::operator()()
     connected_client_data.http_statistics = _http_statistics;
     while (true)
     {
-        std::cout << "create client thread: " << client_id << std::endl;
+        //std::cout << "create client thread: " << client_id << std::endl;
 
         connected_client_data.client_socket = server_socket.accept();
         connected_client_data.client_id = client_id;
 
-        std::cout << "accept client!!! " << std::endl;
+        //std::cout << "accept client!!! " << std::endl;
 
         _client_threads_mutex.acquire();
         _client_threads[client_id] = new Thread<ConnectedClientProc>((void*)&connected_client_data);
@@ -45,7 +45,7 @@ void ClientBrokerProc::operator()()
         _client_threads_mutex.release();
         client_id++;
 
-        std::cout << "ololo: " << client_id << std::endl;
+        //std::cout << "ololo: " << client_id << std::endl;
 
         if (client_id >= 10)
             break;

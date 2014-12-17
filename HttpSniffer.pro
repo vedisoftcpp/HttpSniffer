@@ -28,7 +28,13 @@ SOURCES += main.cpp \
     tcpdatagramid.cpp \
     httpheaderparser.cpp \
     ippacketsnifferbase.cpp \
-    pcapippacketsniffer.cpp
+    pcapippacketsniffer.cpp \
+    Logging/logger.cpp \
+    Logging/filelogger.cpp \
+    Logging/displaylogger.cpp \
+    Logging/loggermanager.cpp \
+    xmllogger.cpp \
+    urllogger.cpp
 
 HEADERS += \
     IMutex.h \
@@ -59,6 +65,15 @@ HEADERS += \
     httpheaderparser.h \
     ippacketsnifferbase.h \
     pcapippacketsniffer.h \
-    types.h
+    types.h \
+    Logging/logger.h \
+    Logging/headers.h \
+    Logging/filelogger.h \
+    Logging/displaylogger.h \
+    Logging/loggermanager.h \
+    mutex.h \
+    xmllogger.h \
+    xmlentry.h \
+    urllogger.h
 
 

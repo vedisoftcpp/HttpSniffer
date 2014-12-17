@@ -17,7 +17,7 @@ public:
     HttpStatistics();
     ~HttpStatistics();
     void get(std::stringstream& stream);
-    void update(const HttpStataEntry& entry);
+    void update(const std::string& url);
 
     template <typename T>
     HttpStatistics& operator<<(const T & data)
@@ -44,7 +44,7 @@ public:
 
 private:
     Mutex _mutex;
-    std::stringstream _stata_stream;
+    //std::stringstream _stata_stream;
     std::map<std::string, HttpStataEntry> _statistics;
 
     HttpStatistics(const HttpStatistics&);

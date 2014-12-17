@@ -9,7 +9,8 @@ namespace HttpSniffer
 
 HttpSnifferProc::HttpSnifferProc(void* data) :
     _http_statistics((HttpStatistics*)data),
-    _ip_packet_sniffer(new PcapIpPacketSniffer())
+    _ip_packet_sniffer(new PcapIpPacketSniffer()),
+    _lm("urls.log")
 {
 }
 
@@ -61,6 +62,14 @@ void HttpSnifferProc::operator()()
         {
             _parser.parse(it->second);
         }
+
+        for (std::vector<std::string>::iterator it = _parser.buffer.begin();
+             it != _parser.buffer.end(); ++it)
+        {
+            _lm.log(*it);
+            _http_statistics->update(*it);
+        }
+        _parser.buffer.clear();
     }
 }
 

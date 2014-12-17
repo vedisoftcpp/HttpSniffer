@@ -48,7 +48,7 @@ Thread<T>::~Thread()
 template <typename T>
 DWORD WINAPI Thread<T>::winapi_thread_toutine(LPVOID param)
 {
-    std::cout << "create_thread\n" << std::endl;
+    //std::cout << "create_thread\n" << std::endl;
     ThreadBase<T>::_thread_wrap_proc((void*)param);
     return 0;
 }

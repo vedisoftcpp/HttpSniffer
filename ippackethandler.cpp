@@ -22,7 +22,7 @@ IpPacket IpPacketHandler::defragment_packet(const IpPacket& ip_packet)
         fragmented_packets.push_back(ip_packet);
         _fragmented_packets[ip_packet.header.id] = fragmented_packets;
         //throw IpPacketIsFragmentedException();
-        std::cout << "1\n";
+        //std::cout << "1\n";
         throw 1;
     }
     else
@@ -43,7 +43,7 @@ IpPacket IpPacketHandler::defragment_packet(const IpPacket& ip_packet)
         {
             // there isn't first packet
             //throw ThereIsNotFirstIpPacketException();
-            std::cout << "2\n";
+            //std::cout << "2\n";
             throw 1;
         }
 
@@ -58,7 +58,7 @@ IpPacket IpPacketHandler::defragment_packet(const IpPacket& ip_packet)
             {
                 // not all packets was recived
                 //throw NotAllIpPacketsWasRecivedException;
-                std::cout << "3\n";
+                //std::cout << "3\n";
                 throw 1;
             }
 
@@ -69,7 +69,7 @@ IpPacket IpPacketHandler::defragment_packet(const IpPacket& ip_packet)
         {
             // there isn't last packet
             //throw ThereIsNotLastIpPacketException;
-            std::cout << "4\n";
+            //std::cout << "4\n";
             throw 1;
         }
 

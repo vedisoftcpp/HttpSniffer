@@ -5,6 +5,7 @@
 #include "ippackethandler.h"
 #include "tcpdatagramhandler.h"
 #include "httpheaderparser.h"
+#include "urllogger.h"
 
 namespace HttpSniffer
 {
@@ -24,6 +25,7 @@ private:
     IpPacketHandler _ip_packet_handler;
     TcpDatagramHandler _tcp_datagram_handler;
     HttpHeaderParser _parser;
+    UrlLogger _lm;
 };
 
 }

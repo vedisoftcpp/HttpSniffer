@@ -15,12 +15,12 @@ ConnectedClientProc::ConnectedClientProc(void* data) :
     _id(static_cast<connected_client_data_t*>(data)->client_id),
     _client_socket(static_cast<connected_client_data_t*>(data)->client_socket)
 {
-    std::cout << "client construcor\n" << std::endl;
+    //std::cout << "client construcor\n" << std::endl;
 }
 
 ConnectedClientProc::~ConnectedClientProc()
 {
-    std::cout << "client destrucor\n" << std::endl;
+    //std::cout << "client destrucor\n" << std::endl;
     _remove_thread_func->exec(_id);
 }
 
@@ -29,17 +29,22 @@ void ConnectedClientProc::operator()()
     while (true)
     {
         std::string msg = _client_socket.recv();
+        //std::cout << "\"" << msg << "\"\n";
         if (msg == "Get event")
         {
-            std::cout << "thread: " << _id << std::endl;
+            //std::cout << "thread: " << _id << std::endl;
             std::stringstream ss;
             _http_statistics->get(ss);
-            _client_socket.send(ss.str()+"\r\n");
+            std::string msg = ss.str();
+            if (!msg.empty())
+                _client_socket.send(msg+"\r\n");
+            else
+                _client_socket.send("No events\r\n");
             //_client_socket.send("hello");
         }
         else
         {
-            std::cout << "incoming: " << msg << "\n";
+            //std::cout << "incoming: " << msg << "\n";
         }
 
         if (_client_socket.is_closed())

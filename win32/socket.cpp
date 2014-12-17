@@ -106,8 +106,9 @@ std::string Socket::recv()
     int iResult = ::recv(_socket, recvbuf, recvbuflen, 0);
     if (iResult > 0)
     {
-        std::cout << "Bytes received\n";
-        return std::string(recvbuf);
+        //std::cout << "Bytes received: " << recvbuf << "\n";
+        //std::cout << "Bytes length: " << iResult << "\n\n";
+        return std::string(recvbuf, iResult);
     }
     return std::string("");
 }

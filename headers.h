@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <sstream>
 
 #ifdef __unix__
 
@@ -47,7 +48,8 @@ class TcpStreamHandler;
 class IpPacketSnifferBase;
 
 struct connected_client_data_t;
-struct HttpStataEntry;
+class HttpStataEntry;
+class XmlEntry;
 
 struct ip_header_t;
 

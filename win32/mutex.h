@@ -1,13 +1,15 @@
 #ifndef MUTEX_H
 #define MUTEX_H
 
-#include "../IMutex.h"
-#include "../headers.h"
+//#include "../IMutex.h"
+//#include "../headers.h"
+#include <windows.h>
 
-class Mutex : public IMutex
+class Mutex //: public IMutex
 {
 public:
     Mutex();
+    ~Mutex();
 
     void acquire();
     void release();
