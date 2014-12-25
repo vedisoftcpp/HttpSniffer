@@ -1,15 +1,13 @@
 #ifndef THREADBASE_H
 #define THREADBASE_H
 
-#include "IThread.h"
-
 template <typename T>
-class ThreadBase : public IThread
+class ThreadBase
 {
 public:
     ThreadBase();
     ThreadBase(void* data);
-    ~ThreadBase();
+    virtual ~ThreadBase();
 
     void start();
 

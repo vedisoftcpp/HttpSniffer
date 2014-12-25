@@ -3,12 +3,11 @@
 
 #include <string>
 #include <ctime>
-#include "xmlentry.h"
 
 namespace HttpSniffer
 {
 
-class HttpStataEntry : public XmlEntry
+class HttpStataEntry
 {
 public:
     std::string url;

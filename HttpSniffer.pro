@@ -1,79 +1,68 @@
 TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
-CONFIG += no_lflags_merge
 
-win32 {
-INCLUDEPATH += $$PWD/../../Local/Include
-LIBS += -L$$PWD/../../Local/Lib/ -lwpcap
-}
-INCLUDEPATH += C:\Users\denism\Local\Include
+#win32 {
+#INCLUDEPATH += $$PWD/../../Local/Include
+#LIBS += -L$$PWD/../../Local/Lib/ -lwpcap
+#}
+#INCLUDEPATH += C:\Users\denism\Local\Include
 
 SOURCES += main.cpp \
     httpsnifferserver.cpp \
-    win32/mutex.cpp \
     httpsnifferproc.cpp \
     clientbrokerproc.cpp \
-    win32/socket.cpp \
     connectedclientproc.cpp \
     removethreadfunc.cpp \
     httpstatistics.cpp \
     utils.cpp \
-    ippackethandler.cpp \
-    ippacket.cpp \
-    tcpdatagram.cpp \
-    ippacketheader.cpp \
-    tcpdatagramheader.cpp \
-    tcpdatagramhandler.cpp \
-    tcpdatagramid.cpp \
-    httpheaderparser.cpp \
-    ippacketsnifferbase.cpp \
-    pcapippacketsniffer.cpp \
     Logging/logger.cpp \
     Logging/filelogger.cpp \
     Logging/displaylogger.cpp \
     Logging/loggermanager.cpp \
-    xmllogger.cpp \
-    urllogger.cpp
+    urllogger.cpp \
+    unix/mutex.cpp \
+    unix/socket.cpp
 
 HEADERS += \
-    IMutex.h \
-    IThread.h \
     Application.h \
     httpsnifferserver.h \
     headers.h \
-    win32/mutex.h \
     httpsnifferproc.h \
     clientbrokerproc.h \
-    ISocket.h \
-    win32/socket.h \
     connectedclientproc.h \
     removethreadfunc.h \
     httpstatistics.h \
     connected_client_data_t.h \
     threadbase.hpp \
-    win32/thread.hpp \
     utils.h \
     HttpStataEntry.h \
-    ippackethandler.h \
-    ippacket.h \
-    tcpdatagram.h \
-    ippacketheader.h \
-    tcpdatagramheader.h \
-    tcpdatagramhandler.h \
-    tcpdatagramid.h \
-    httpheaderparser.h \
-    ippacketsnifferbase.h \
-    pcapippacketsniffer.h \
-    types.h \
     Logging/logger.h \
     Logging/headers.h \
     Logging/filelogger.h \
     Logging/displaylogger.h \
     Logging/loggermanager.h \
-    mutex.h \
-    xmllogger.h \
-    xmlentry.h \
-    urllogger.h
+    urllogger.h \
+    unix/mutex.h \
+    unix/socket.h \
+    unix/thread.hpp
 
+
+#LIBS += -lpcap
+
+#LIBS += -L$$PWD/../build-HttpSniffer5-Desktop-Debug/ -lHttpSniffer5
+
+#INCLUDEPATH += $$PWD/../build-HttpSniffer5-Desktop-Debug
+#DEPENDPATH += $$PWD/../build-HttpSniffer5-Desktop-Debug
+
+#unix:!macx: PRE_TARGETDEPS += $$PWD/../build-HttpSniffer5-Desktop-Debug/libHttpSniffer5.a
+
+unix:!macx: LIBS += -L$$PWD/../build-HttpSniffer5-Desktop-Debug/ -lHttpSniffer5
+
+INCLUDEPATH += $$PWD/../build-HttpSniffer5-Desktop-Debug
+DEPENDPATH += $$PWD/../build-HttpSniffer5-Desktop-Debug
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../build-HttpSniffer5-Desktop-Debug/libHttpSniffer5.a
+
+LIBS += -lpcap
 

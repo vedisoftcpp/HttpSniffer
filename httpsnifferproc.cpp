@@ -2,74 +2,46 @@
 #include "httpstatistics.h"
 #include "HttpStataEntry.h"
 #include "utils.h"
-#include "pcapippacketsniffer.h"
+
+#include <http_sniffer/headers.h>
+#include <http_sniffer/httpheaderdetectorfactory.h>
+#include <http_sniffer/tcpstreamswitch.h>
+#include <http_sniffer/pcapippacketreciever.h>
 
 namespace HttpSniffer
 {
 
 HttpSnifferProc::HttpSnifferProc(void* data) :
     _http_statistics((HttpStatistics*)data),
-    _ip_packet_sniffer(new PcapIpPacketSniffer()),
     _lm("urls.log")
 {
 }
 
 HttpSnifferProc::~HttpSnifferProc()
 {
-    if (_ip_packet_sniffer != NULL)
-        delete _ip_packet_sniffer;
 }
 
 void HttpSnifferProc::operator()()
 {
-    _ip_packet_sniffer->init();
+    vector<string> urls;
+    PcapIpPacketReciever ip_packet_reciever;
+    TcpStreamSwitch tcp_stream_switch;
+    HttpHeaderDetectorFactory http_header_detector_factory(urls);
+    tcp_stream_switch.set_tcp_stream_handler_factory(http_header_detector_factory);
+    ip_packet_reciever.set_tcp_stream_switch(tcp_stream_switch);
+    ip_packet_reciever.init();
     while (true)
     {
-        IpPacket ip_packet = _ip_packet_sniffer->get_ip_packet();
-        if (!is_tcp_protocol(ip_packet))
-            continue;
-        try
+        ip_packet_reciever.work();
+        if (!urls.empty())
         {
-            ip_packet = _ip_packet_handler.defragment_packet(ip_packet);
+            for (vector<string>::iterator it = urls.begin(); it != urls.end(); ++it)
+            {
+                _lm.log(*it);
+                _http_statistics->update(*it);
+            }
+            urls.clear();
         }
-        catch(...)
-        {
-            continue;
-        }
-
-        TcpDatagram tcp_datagram(ip_packet);
-        if (tcp_datagram.header.dst_port == 80)
-        {
-            _tcp_datagram_handler.process(tcp_datagram);
-        }
-        else if (tcp_datagram.header.src_port == 80)
-        {
-            if (tcp_datagram.header.fin_flag)
-                _tcp_datagram_handler.process(tcp_datagram);
-        }
-        else
-            continue;
-
-        for (std::vector<std::string>::iterator it = _tcp_datagram_handler.buffer.begin();
-             it != _tcp_datagram_handler.buffer.end(); ++it)
-        {
-            _parser.parse(*it);
-        }
-        _tcp_datagram_handler.buffer.clear();
-
-        for (std::map<TcpDatagramId, std::string>::iterator it = _tcp_datagram_handler.stream_data.begin();
-             it != _tcp_datagram_handler.stream_data.end(); ++it)
-        {
-            _parser.parse(it->second);
-        }
-
-        for (std::vector<std::string>::iterator it = _parser.buffer.begin();
-             it != _parser.buffer.end(); ++it)
-        {
-            _lm.log(*it);
-            _http_statistics->update(*it);
-        }
-        _parser.buffer.clear();
     }
 }
 

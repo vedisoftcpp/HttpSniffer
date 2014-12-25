@@ -44,11 +44,6 @@ void ClientBrokerProc::operator()()
         _client_threads[client_id]->start();
         _client_threads_mutex.release();
         client_id++;
-
-        //std::cout << "ololo: " << client_id << std::endl;
-
-        if (client_id >= 10)
-            break;
     }
 }
 

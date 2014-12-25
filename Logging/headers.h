@@ -1,5 +1,6 @@
-#ifndef HEADERS_H
-#define HEADERS_H
+#pragma once
+//#ifndef HEADERS_H
+//#define HEADERS_H
 
 #include <vector>
 #include <string>
@@ -14,4 +15,4 @@ class DisplayLogger;
 
 }
 
-#endif // HEADERS_H
+//#endif // HEADERS_H

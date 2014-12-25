@@ -1,5 +1,4 @@
-#ifndef HEADERS_H
-#define HEADERS_H
+#pragma once
 
 #include <stdio.h>
 #include <iostream>
@@ -11,25 +10,27 @@
 
 #ifdef __unix__
 
-    #include "posix/thread.hpp"
-    #include "posix/mutex.h"
-    #include "posix/socket.h"
+    #include "unix/thread.hpp"
+    #include "unix/mutex.h"
+    #include "unix/socket.h"
 
 #elif defined(_WIN32) || defined(WIN32)
 
-    #include <WinSock2.h>
-    #include <ws2tcpip.h>
-    #pragma comment(lib, "Ws2_32.lib")
-    #define HAVE_REMOTE 1
-    #include <pcap.h>
-    #include "win32/thread.hpp"
-    #include "win32/mutex.h"
-    #include "win32/socket.h"
+//    #include <WinSock2.h>
+//    #include <ws2tcpip.h>
+//    #pragma comment(lib, "Ws2_32.lib")
+//    #define HAVE_REMOTE 1
+//    #include <pcap.h>
+//    #include "win32/thread.hpp"
+//    #include "win32/mutex.h"
+//    #include "win32/socket.h"
 
 #endif
 
 namespace HttpSniffer
 {
+
+using std::string;
 
 class Application;
 class HttpSnifferServer;
@@ -38,21 +39,10 @@ class ClientBrokerProc;
 class ConnectedClientProc;
 class RemoveThreadFunc;
 class HttpStatistics;
-class IpPacket;
-class IpPacketHeader;
-class IpPacketHandler;
-class TcpDatagram;
-class TcpDatagramHeader;
-class TcpStreamHandler;
-
-class IpPacketSnifferBase;
 
 struct connected_client_data_t;
 class HttpStataEntry;
-class XmlEntry;
-
-struct ip_header_t;
 
 }
 
-#endif // HEADERS_H
+

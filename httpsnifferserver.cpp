@@ -4,9 +4,9 @@ namespace HttpSniffer
 {
 
 HttpSnifferServer::HttpSnifferServer() :
-    _http_statistics(),
     _http_sniffer_thread((void*)&_http_statistics),
-    _client_broker_thread((void*)&_http_statistics)
+    _client_broker_thread((void*)&_http_statistics),
+    _http_statistics()
 {
 }
 

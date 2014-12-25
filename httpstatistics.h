@@ -33,18 +33,18 @@ public:
         return *this;
     }
 
-    template<>
-    HttpStatistics& operator<<(const HttpStataEntry & entry)
-    {
-        _mutex.acquire();
-        _mutex.release();
+    //template<>
+//    HttpStatistics& operator<<(const HttpStataEntry & entry)
+//    {
+//        _mutex.acquire();
+//        _mutex.release();
 
-        return *this;
-    }
+//        return *this;
+//    }
 
 private:
     Mutex _mutex;
-    //std::stringstream _stata_stream;
+    std::stringstream _stata_stream;
     std::map<std::string, HttpStataEntry> _statistics;
 
     HttpStatistics(const HttpStatistics&);

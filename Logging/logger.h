@@ -3,11 +3,13 @@
 
 #include "headers.h"
 
-#ifdef __unix__
-    #include "../posix/mutex.h"
-#elif defined(_WIN32) || defined(WIN32)
-    #include "../win32/mutex.h"
-#endif
+#include "../unix/mutex.h"
+
+//#ifdef __unix__
+//    #include "../unix/mutex.h"
+//#elif defined(_WIN32) || defined(WIN32)
+//    //#include "../win32/mutex.h"
+//#endif
 
 namespace logging
 {
