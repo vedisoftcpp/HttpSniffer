@@ -13,14 +13,17 @@ ConnectedClientProc::ConnectedClientProc(void* data) :
     _id(static_cast<connected_client_data_t*>(data)->client_id),
     _remove_thread_func(static_cast<connected_client_data_t*>(data)->remove_thread_func),
     _http_statistics(static_cast<connected_client_data_t*>(data)->http_statistics),
-    _client_socket(static_cast<connected_client_data_t*>(data)->client_socket)
+    _client_socket(static_cast<connected_client_data_t*>(data)->client_socket),
+    _start_time(::time(0))
 {
     //std::cout << "client construcor\n" << std::endl;
+    _http_statistics->client_init(_id, _start_time);
 }
 
 ConnectedClientProc::~ConnectedClientProc()
 {
     //std::cout << "client destrucor\n" << std::endl;
+    _http_statistics->client_exit(_id);
     _client_socket.close();
     _remove_thread_func->exec(_id);
 }
@@ -34,7 +37,8 @@ void ConnectedClientProc::operator()()
         {
             //std::cout << "thread: " << _id << std::endl;
             std::stringstream ss;
-            _http_statistics->get(ss);
+            _start_time = _http_statistics->get(ss, _id, _start_time);
+            //_start_time = ::time(0);
             std::string msg = ss.str();
             if (!msg.empty())
                 _client_socket.send(msg+"\r\n");

@@ -7,7 +7,6 @@
 
 namespace HttpSniffer
 {
-
 ClientBrokerProc::ClientBrokerProc(void* data) :
     _http_statistics((HttpStatistics*)data)
 {

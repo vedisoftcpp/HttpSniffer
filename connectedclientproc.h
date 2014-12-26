@@ -2,6 +2,7 @@
 #define CONNECTEDCLIENTPROC_H
 
 #include "headers.h"
+#include "time.h"
 
 namespace HttpSniffer
 {
@@ -22,6 +23,7 @@ private:
     RemoveThreadFunc* _remove_thread_func;
     HttpStatistics* _http_statistics;
     Socket _client_socket;
+    time_t _start_time;
 };
 
 }
