@@ -23,7 +23,6 @@ private:
     RemoveThreadFunc* _remove_thread_func;
     HttpStatistics* _http_statistics;
     Socket _client_socket;
-    time_t _start_time;
 };
 
 }

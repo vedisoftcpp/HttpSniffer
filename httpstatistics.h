@@ -18,8 +18,9 @@ class HttpStatistics
 public:
     HttpStatistics();
     ~HttpStatistics();
-    time_t get(std::stringstream& stream, int user_id, time_t start_time);
+    void get(std::stringstream& stream, int user_id);
     void update(const std::string& url);
+    void clear() { _statistics.clear(); }
 
 //    template <typename T>
 //    HttpStatistics& operator<<(const T & data)
@@ -46,10 +47,19 @@ public:
 //        return *this;
 //    }
 
-    void client_init(int client_id, time_t start_time)
+    void client_init(int client_id)
     {
         _mutex.acquire();
-        _client_start[client_id] = start_time;
+
+        if (_client_start.empty())
+        {
+            _client_start[client_id] = 0;
+        }
+        else
+        {
+            _client_start[client_id] = ::time(0);
+        }
+
         _mutex.release();
     }
 
@@ -57,27 +67,6 @@ public:
     {
         _mutex.acquire();
         _client_start.erase(client_id);
-        if (_client_start.size() == 0)
-            _statistics.clear();
-        else
-        {
-            time_t min_start_time = _client_start.begin()->second;
-            for (std::map<int, time_t>::iterator it = _client_start.begin();
-                 it != _client_start.end(); ++it)
-            {
-                if (it->second < min_start_time)
-                    min_start_time = it->second;
-            }
-            for (std::deque<HttpStataEntry>::iterator it = _statistics.begin();
-                 it != _statistics.end();)
-            {
-                HttpStataEntry& entry = *it;
-                if (min_start_time >= entry.timestamp)
-                    _statistics.erase(it++);
-                else
-                    break;
-            }
-        }
         _mutex.release();
     }
 
@@ -105,6 +94,40 @@ private:
             }
         }
         return stata;
+    }
+
+    void unsafe_clean_up()
+    {
+        //_mutex.acquire();
+
+        if (!_client_start.empty())
+        {
+            //std::cout << "C 1\n";
+
+            time_t min_start_time = _client_start.begin()->second;
+            for (std::map<int, time_t>::iterator it = _client_start.begin();
+                 it != _client_start.end(); ++it)
+            {
+                if (it->second < min_start_time)
+                    min_start_time = it->second;
+            }
+
+            //std::cout << "C 2\n";
+
+            for (std::deque<HttpStataEntry>::iterator it = _statistics.begin();
+                 it != _statistics.end();)
+            {
+                HttpStataEntry& entry = *it;
+                if (min_start_time >= entry.timestamp)
+                    it = _statistics.erase(it);
+                else
+                    break;
+            }
+
+            //std::cout << "C 3\n";
+        }
+
+        //_mutex.release();
     }
 
     HttpStatistics(const HttpStatistics&);
